@@ -4,7 +4,7 @@ workflows:
     max_build_duration: 120
     environment:
       groups:
-        - appstore_credentials   # you will create this group in Codemagic (explained below)
+        - appstore_credentials
       vars:
         BUNDLE_ID: "com.dashboard.app"
         SCHEME: "App"
@@ -30,17 +30,39 @@ workflows:
           pod install --repo-update
           cd ..
 
+      - name: Build iOS archive (xcodebuild)
+        script: |
+          set -o pipefail
+          mkdir -p build
+          # Archive the app (adjust workspace and scheme if different)
+          xcodebuild -workspace "${XCODE_WORKSPACE}" \
+            -scheme "${SCHEME}" \
+            -configuration Release \
+            -archivePath build/App.xcarchive \
+            clean archive | xcpretty || cat
+
+      - name: Export .ipa from archive
+        script: |
+          # Ensure exportOptions.plist exists at ios/exportOptions.plist
+          if [ ! -f ios/exportOptions.plist ]; then
+            echo "Error: ios/exportOptions.plist not found. Create it as instructed." >&2
+            exit 1
+          fi
+          mkdir -p build/ipa
+          xcodebuild -exportArchive \
+            -archivePath build/App.xcarchive \
+            -exportOptionsPlist ios/exportOptions.plist \
+            -exportPath build/ipa | xcpretty || cat
+
     artifacts:
-      - build/ios/**/*.ipa
-      - build/ios/**/*.xcarchive
+      - build/ipa/*.ipa
+      - build/App.xcarchive
 
     publishing:
       app_store_connect:
-        # App Store Connect API authentication requires all three:
-        # - api_key: the contents of the private key (.p8)
-        # - key_id: the Key ID from App Store Connect
-        # - issuer_id: the Issuer ID from App Store Connect
-        api_key: $APP_STORE_CONNECT_API_KEY   # .p8 private key contents
-        key_id: $APP_STORE_CONNECT_KEY_ID     # e.g. ABCDE12345
-        issuer_id: $APP_STORE_CONNECT_ISSUER_ID # e.g. 12345678-1234-1234-1234-123456789012
+        api_key: $APP_STORE_CONNECT_API_KEY
+        key_id: $APP_STORE_CONNECT_KEY_ID
+        issuer_id: $APP_STORE_CONNECT_ISSUER_ID
         submit_to_testflight: true
+        testflight:
+          notify_external_testers: true
