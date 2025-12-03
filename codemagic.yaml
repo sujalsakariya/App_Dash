@@ -10,7 +10,7 @@ workflows:
         SCHEME: "App"
         XCODE_WORKSPACE: "ios/App/App.xcworkspace"
       node: "18.16.0"
-      xcode: "15.2"
+      xcode: "16.1"
       cocoapods: default
 
     scripts:
