@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <!-- Export for App Store / TestFlight -->
+  <key>method</key>
+  <string>app-store</string>
+
+  <!-- Use automatic signing from project settings -->
+  <key>signingStyle</key>
+  <string>automatic</string>
+
+  <!-- Include all symbols for better crash diagnostics -->
+  <key>uploadSymbols</key>
+  <true/>
+
+  <!-- Rebuild Bitcode (kept false for modern Xcode) -->
+  <key>compileBitcode</key>
+  <false/>
+
+  <!-- Manage destination assets automatically -->
+  <key>destination</key>
+  <string>export</string>
+
+  <!-- Team ID for signing (optional if set in project). If needed, set via environment and sed replace in CI. -->
+  <!-- <key>teamID</key>
+  <string>YOUR_TEAM_ID</string> -->
+
+  <!-- Use the bundle identifier from the archive. Provisioning is resolved automatically. -->
+  <key>provisioningProfiles</key>
+  <dict/>
+
+  <!-- Thinning not required for TestFlight -->
+  <key>thinning</key>
+  <string>&lt;none&gt;</string>
+
+  <!-- Keep managed signing and packaging -->
+  <key>stripSwiftSymbols</key>
+  <true/>
+</dict>
+</plist><?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>method</key>
+  <string>app-store</string>
+  <key>compileBitcode</key>
+  <false/>
+  <key>destination</key>
+  <string>export</string>
+  <key>signingStyle</key>
+  <string>automatic</string>
+  <key>stripSwiftSymbols</key>
+  <true/>
+</dict>
+</plist>
