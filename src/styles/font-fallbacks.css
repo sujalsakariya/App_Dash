@@ -1,0 +1,63 @@
+/* Font loading optimization and fallbacks */
+
+/* Critical font loading styles */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Inter'), local('Inter-Regular');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local('Inter Medium'), local('Inter-Medium');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Inter SemiBold'), local('Inter-SemiBold');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Inter Bold'), local('Inter-Bold');
+}
+
+/* Fallback for when Inter is not available */
+.font-fallback {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Prevent layout shift during font loading */
+.font-loading {
+  font-feature-settings: 'kern' 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Style for slow connection indicators */
+.slow-connection-warning {
+  background-color: #fef3cd;
+  border: 1px solid #fecaca;
+  color: #92400e;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  margin: 8px 0;
+  display: none;
+}
+
+.slow-connection-warning.visible {
+  display: block;
+}

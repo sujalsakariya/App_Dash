@@ -1,0 +1,13 @@
+/* Tailwind core */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* Font fallbacks and optimization */
+@import "font-fallbacks";
+
+/* Demos */
+@import "demos/demo1";
+
+/* Shadcn UI */
+@import "shadcn.ui";
