@@ -36,7 +36,13 @@ workflows:
 
     publishing:
       app_store_connect:
-        api_key: $APP_STORE_CONNECT_API_KEY   # stored as env variable
+        # App Store Connect API authentication requires all three:
+        # - api_key: the contents of the private key (.p8)
+        # - key_id: the Key ID from App Store Connect
+        # - issuer_id: the Issuer ID from App Store Connect
+        api_key: $APP_STORE_CONNECT_API_KEY   # .p8 private key contents
+        key_id: $APP_STORE_CONNECT_KEY_ID     # e.g. ABCDE12345
+        issuer_id: $APP_STORE_CONNECT_ISSUER_ID # e.g. 12345678-1234-1234-1234-123456789012
         submit_to_testflight: true
         testflight:
           notify_external_testers: true
