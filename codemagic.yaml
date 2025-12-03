@@ -44,5 +44,3 @@ workflows:
         key_id: $APP_STORE_CONNECT_KEY_ID     # e.g. ABCDE12345
         issuer_id: $APP_STORE_CONNECT_ISSUER_ID # e.g. 12345678-1234-1234-1234-123456789012
         submit_to_testflight: true
-        testflight:
-          notify_external_testers: true
